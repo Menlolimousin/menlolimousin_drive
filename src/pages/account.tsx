@@ -13,7 +13,8 @@ interface IVehicleClass {
   maxPerson: string;
   maxBag: string;
   carImage: string;
-
+  id: any;
+  setCars: any;
   w: number;
   h: number;
 }
@@ -103,10 +104,11 @@ const account = () => {
   const uploadImage = async (base64EncodedImage: string) => {
     await api()
       .post("/Drive/addCar", { base64EncodedImage, ...formVehicle })
-      .then(() => {
+      .then((data: any) => {
         setFileInputState("");
         setPreviewSource("");
-        Success("Image uploaded successfully");
+        Success("Car created successfully");
+        setCars(data.data.data);
       })
       .catch(() => {
         Error("something went wrong!");
@@ -189,7 +191,6 @@ const account = () => {
             // type="submit"
             clickable={onFocusForm}
             color="primary"
-            className={`${!onFocusForm ? "opacity-50" : "opacity-100"}`}
             css={{ px: "$13" }}
           >
             {loading ? <Loading color="white" size="sm" /> : "Save"}
@@ -198,40 +199,41 @@ const account = () => {
       </form>
       <form onSubmit={handleSubmitFile} className="p-8 w-full">
         <h1 className="mb-4 text-3xl text-red-500">Vehicles Settings</h1>
-
-        <Input
-          label="Number Plate"
-          placeholder="Omer Keskin"
-          value={formVehicle?.numberPlate}
-          fullWidth={true}
-          className="mb-4"
-          name="numberPlate"
-          onChange={handleChangeInputVehicle}
-        />
         <Input
           value={formVehicle?.vehicleName}
           label="Vehicle Name"
           className="mb-4"
           name="vehicleName"
-          placeholder="Omer Keskin"
+          placeholder="Chevrolet Suburban 4WD"
           fullWidth={true}
           onChange={handleChangeInputVehicle}
         />
         <Input
           value={formVehicle?.vehicleClass}
           name="vehicleClass"
-          label="vehicleClass"
+          label="Vehicle Class"
           className="mb-4"
-          placeholder="tester@gmail.com"
+          placeholder="Luxury SUV"
           fullWidth={true}
           onChange={handleChangeInputVehicle}
         />
         <Input
+          label="Number Plate"
+          placeholder="64001U2"
+          value={formVehicle?.numberPlate}
+          fullWidth={true}
+          className="mb-4"
+          name="numberPlate"
+          onChange={handleChangeInputVehicle}
+        />
+
+        <Input
           value={formVehicle?.maxPeople}
           className="mb-4"
           name="maxPeople"
-          label="maxPeople"
-          placeholder="tester@gmail.com"
+          type="number"
+          label="Max People"
+          placeholder="7"
           fullWidth={true}
           onChange={handleChangeInputVehicle}
         />
@@ -268,11 +270,13 @@ const account = () => {
             return (
               <CarCard
                 key={index}
+                id={item._id}
                 carType={item.vehicleClass}
                 carName={item.vehicleName}
                 maxPerson={item.maxPeople}
                 maxBag={item.maxSuitCase}
                 carImage={item.image}
+                setCars={setCars}
                 w={319}
                 h={319}
               />
@@ -289,7 +293,8 @@ const CarCard: React.FC<IVehicleClass> = ({
   maxPerson,
   maxBag,
   carImage,
-
+  id,
+  setCars,
   w,
   h,
 }) => {
@@ -300,7 +305,27 @@ const CarCard: React.FC<IVehicleClass> = ({
       }`}
     >
       <div className="border-b pb-2">
-        <div className="text-2xl font-semibold">{carType}</div>
+        <div className="text-2xl font-semibold flex justify-between items-center">
+          <span>{carType}</span>
+          <button
+            onClick={async () => {
+              await api()
+                .delete(`/Drive/deleteCar/${id}`)
+                .then((data: any) => {
+                  setCars(data.data.data);
+                  Success("Car Successfly Deleted.");
+                })
+                .catch((err) => {
+                  Error(
+                    err.response.data.message ||
+                      "An error has occurred, please try again."
+                  );
+                });
+            }}
+          >
+            <FontAwesomeIcon icon="trash" className="text-red-500 text-lg" />
+          </button>
+        </div>
         <div className="">{carName}</div>
         <div className="flex items-center">
           <div className="text-primary-vehicleClassColor mr-4 flex items-center">
