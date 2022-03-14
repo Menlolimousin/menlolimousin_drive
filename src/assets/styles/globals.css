@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,
+body {
+  padding: 0;
+  margin: 0;
+  /* font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif; */
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+* {
+  box-sizing: border-box;
+  font-family: "BalooThambi2-Regular";
+}
+@font-face {
+  font-family: "BalooThambi2-Regular";
+  src: local("BalooThambi2-Regular"),
+    url(../fonts/Baloo/BalooThambi2-Regular.ttf);
+}
+.ReactModal__Overlay {
+  background-color: rgba(0, 0, 0, 0.5) !important;
+  z-index: 100;
+}
