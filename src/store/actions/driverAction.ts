@@ -24,7 +24,9 @@ export const startBooking =
           status: data.status,
         });
         dispatch({ type: "START_BOOKING_RESET" });
-        Success("The booking has been successfully completed and the fee has been charged to the user")
+        Success(
+          "The booking has been successfully completed and the fee has been charged to the user"
+        );
         router.push(`/active/${bookingId}`);
       })
       .catch((err) => {
@@ -48,6 +50,9 @@ export const endBooking =
     await api()
       .get(`/Drive/endBooking/${bookingId}`)
       .then((data) => {
+        Success(
+          "The booking has been completed successfully and the fee has been charged to the user."
+        );
         dispatch({
           type: "END_BOOKING_SUCCESS",
           payload: data.data.data,
