@@ -60,7 +60,7 @@ const notified = () => {
             {Drive?.status === "charging"
               ? "Go to Charging"
               : Drive?.status === "notified"
-              ? "Start Drive for charging"
+              ? "Start Drive for"
               : Drive?.status === "active"
               ? "Go to Active"
               : Drive?.status === "confirmed" || Drive?.status === "changed"

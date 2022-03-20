@@ -130,7 +130,7 @@ const rider = () => {
               ? "Go to Active"
               : Drive?.status === "confirmed" || Drive?.status === "changed"
               ? "Go to Upcoming"
-              : "Start charging for rider"}
+              : "Start for rider"}
           </button>
         )}
       </div>
