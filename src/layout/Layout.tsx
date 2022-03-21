@@ -16,7 +16,11 @@ const Layout: React.FC<ReactNode> = ({ children }) => {
   const { user, drive, auth } = useSelector((state: AppState) => state);
 
   useEffect(() => {
-    if (auth?.error === "This Driver Not Found") {
+    if (
+      auth?.error === "This Driver Not Found" ||
+      drive?.error === "This Driver Not Found" ||
+      user?.error === "This Driver Not Found"
+    ) {
       Error("This Drive Not Found Exiting");
       setTimeout(() => {
         Cookies.remove("driveToken");
