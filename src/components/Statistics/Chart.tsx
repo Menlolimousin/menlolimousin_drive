@@ -33,13 +33,12 @@ export const options = {
 };
 
 export function Chart({ bills }: any) {
-  const labels = bills.map((item: any) => {
-    return item.date;
+  const labels = bills?.map((item: any) => {
+    return item?.date;
   });
-  const datas = bills.map((item: any) => {
-    return item.totalIncome.toFixed(2);
+  const datas = bills?.map((item: any) => {
+    return item?.totalIncome;
   });
-
   const data = {
     labels,
     datasets: [
