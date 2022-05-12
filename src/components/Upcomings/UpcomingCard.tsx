@@ -3,6 +3,7 @@ import Spinners from "@components/Spinners";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useRouter } from "next/router";
 import React, { useEffect, useRef, useState } from "react";
+
 import { useDispatch } from "react-redux";
 import {
   changedDate,
@@ -258,15 +259,22 @@ const UpcomingCard: React.FC<IUpcomingCard> = ({
                   }}
                   className="h-10 mb-2 bg-green-500 border-green-500 border text-xl w-full rounded text-white"
                 >
-                  Confirmed Booking
+                  Confirmed Trip
                 </button>
                 <button
-                  onClick={() => {
-                    setIsModal(true);
+                  onClick={async () => {
+                    await api()
+                      .get<any>(`/Booking/canceledBooking/${uuid}`, {
+                        params: { pathname: "/bookings/upcoming" },
+                      })
+                      .then((data) => {
+                        window.location.reload();
+                      })
+                      .catch((err) => {});
                   }}
-                  className="h-10 bg-blue-500 border-blue-500 border text-xl w-full rounded text-white"
+                  className="h-10 bg-red-500 border-red-500 border text-xl w-full rounded text-white"
                 >
-                  The change date and time
+                  Cancel Trip
                 </button>
               </>
             )}
