@@ -88,7 +88,7 @@ const charging = () => {
             className="h-10 bg-green-500 border-green-500 border text-xl w-full rounded text-white"
           >
             {Drive?.status === "charging"
-              ? "Start Booking"
+              ? "Start Trip"
               : Drive?.status === "notified"
               ? "Go to Notified"
               : Drive?.status === "active"

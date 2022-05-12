@@ -88,7 +88,7 @@ const rider = () => {
       loading={loading}
     >
       <div className="py-2 px-4 bg-white border rounded-t-xl border-t flex-1 h-full flex flex-col justify-between items-center">
-        <h1 className="text-xl font-semibold">Starting for drive charging</h1>
+        <h1 className="text-xl font-semibold">Waiting for rider</h1>
         <div>
           {startRider && (
             <Countdown date={Drive?.startRider} renderer={renderer} />

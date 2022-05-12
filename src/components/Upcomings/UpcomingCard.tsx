@@ -105,7 +105,15 @@ const UpcomingCard: React.FC<IUpcomingCard> = ({
           <div className="w-6">
             <FontAwesomeIcon icon="map-marker-alt" className="text-gray-400" />
           </div>
-          <span>{pickup}</span>
+          <span
+            onClick={() => {
+              window.location.replace(
+                `https://www.google.com/maps/dir/?api=1&destination=${pickup}&travelmode=driving`
+              );
+            }}
+          >
+            {pickup}
+          </span>
         </div>
       </div>
       <div className="mb-2">

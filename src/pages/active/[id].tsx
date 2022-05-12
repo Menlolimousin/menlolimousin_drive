@@ -178,7 +178,7 @@ const activedrive = () => {
                 disabled={loading}
                 className={`h-10 bg-red-500 border-red-500 border text-xl w-full rounded text-white`}
               >
-                Complete Booking
+                Complate Trip
               </button>
             )}
           </>
